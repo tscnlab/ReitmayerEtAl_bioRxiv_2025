@@ -1,0 +1,6 @@
+l: Momentary_Affect_Scale_1
+stime: 2023-09-05-09-51
+T: 1810
+t: scale
+a: 7
+s: 7

@@ -1,0 +1,46 @@
+version: 3.4.4
+server-time: 2023-08-30-19-31
+client-time: 2023-07-30-19-31
+user_agent: mozilla/5.0 (linux; android 10; k) applewebkit/537.36 (khtml, like gecko) chrome/116.0.0.0 safari/537.36
+screen_width: 753
+screen_height: 1205
+html_width: 753
+html_height: 686
+user_time: 2023-07-30-19-31
+T: 0
+l: N_backexperiment
+stime: 2023-08-30-19-35
+T: 236515
+t: experiment
+l: NASA_TLX
+stime: 2023-08-30-19-35
+T: 14088
+t: range
+a: 10
+s: 10
+a: 10
+s: 10
+a: 9
+s: 9
+l: Momentary_Affect_Scale_1
+stime: 2023-08-30-19-35
+T: 12077
+t: scale
+a: 8
+s: 8
+l: Momentary_Affect_Scale_2
+stime: 2023-08-30-19-36
+T: 6820
+t: scale
+a: 6
+s: 6
+endcode: 
+end 2023-08-30-19-36
+l: Momentary_Affect_Scale_2
+stime: 2023-08-30-19-40
+T: 233579
+t: scale
+a: 5
+s: 5
+endcode: 
+end 2023-08-30-19-40

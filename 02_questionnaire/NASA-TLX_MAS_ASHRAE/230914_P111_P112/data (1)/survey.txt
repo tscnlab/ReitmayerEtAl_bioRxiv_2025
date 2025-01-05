@@ -1,0 +1,52 @@
+l: N_backexperiment
+t: experiment
+- N_back
+
+l: NASA_TLX
+t: range
+q: Questionnaire on the performance test according to NASA-TLX and MAS
+- {min=1,max=20,left=Very low,right=Very high} How mentally demanding was the test?
+- {min=1,max=20,left=Very low,right=Very high} How hurried or rushed was the pace of the test?
+- {min=1,max=20,left=Perfect,right=Failure} How successful were you in accomplishing what you were asked to do?
+
+scale: Momentary_Affect_Scale_1
+- Very relaxed, calm, composed<br><br><br>-5
+- <br><br><br><br><br><br>-4
+- <br><br><br><br><br><br>-3
+- <br><br><br><br><br><br>-2
+- <br><br><br><br><br><br>-1
+- <br><br><br><br><br><br>0
+- <br><br><br><br><br><br>1
+- <br><br><br><br><br><br>2
+- <br><br><br><br><br><br>3
+- <br><br><br><br><br><br>4
+- Very nervous, tense, anxious, stressed<br><br>5
+
+scale: Momentary_Affect_Scale_2
+- Very sluggish, tired, sleepy, dull<br><br>-5
+- <br><br><br><br><br><br>-4
+- <br><br><br><br><br><br>-3
+- <br><br><br><br><br><br>-2
+- <br><br><br><br><br><br>-1
+- <br><br><br><br><br><br>0
+- <br><br><br><br><br><br>1
+- <br><br><br><br><br><br>2
+- <br><br><br><br><br><br>3
+- <br><br><br><br><br><br>4
+- Very active, energetic, alert, bright<br><br>5
+
+random: begin
+
+l: Momentary_Affect_Scale_1
+t: scale Momentary_Affect_Scale_1
+o: boxes
+q: Questionnaire on the performance test according to NASA-TLX and MAS
+- Click the number that describes how you felt during the test.
+
+l: Momentary_Affect_Scale_2
+t: scale Momentary_Affect_Scale_2
+o: boxes
+q: Questionnaire on the performance test according to NASA-TLX and MAS
+- Click the number that describes how you felt during the test.
+
+random: end
