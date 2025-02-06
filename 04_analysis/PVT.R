@@ -29,14 +29,13 @@ summary_dtPVT[, `:=` (
   Timeframe = as.factor(Timeframe)
 )]
 
-
-
 by(summary_dtPVT$median_RT,summary_dtPVT$Scenario, shapiro.test)
 by(summary_dtPVT$median_RT,summary_dtPVT$Scenario, shapiro.test)
 
 model = aov(median_Error ~ Scenario, data = summary_dtPVT)
 summary(model)
 
+##### Code for Figures
 
 (PVTmeansd = ggplot(summary_dtPVT, aes(x = Timeframe, y = mean_RT, group = Scenario, colour = Scenario))+
   geom_line()+
@@ -66,8 +65,6 @@ summary(model)
         legend.title=element_text(size=10))+ 
   theme(legend.position = "none"))
 print(PVTmeansd)
-
-
 
 my_comparisonsdtPVT = list(c("1 lux", "10 lux"),c("1 lux", "100 lux"),c("1 lux", "1000 lux"),c("10 lux", "100 lux"),c("10 lux", "1000 lux"), c("100 lux", "1000 lux"))
 
@@ -101,7 +98,7 @@ ggsave(filename = "Figure3-PVT.jpg",width = 10.5, height = 16.5, unit = "cm", dp
 
 
 
-##############Linear Mixed Model Analysis
+##### Linear Mixed Model Analysis
 
 PVTNBACKNASATCExp2[, `:=` (
   Scenario = as.factor(Scenario),               
