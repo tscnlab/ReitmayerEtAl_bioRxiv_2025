@@ -36,7 +36,7 @@ by(summary_dtNASAMASExp2$median_Accuracy,summary_dtNASAMASExp2$Scenario, shapiro
 model = aov(median_Accuracy ~ Scenario, data = summary_dtNASAMASExp2)
 summary(model)
 
-
+##### Code for Figures
 
 (Nbackmeansd = ggplot(summary_dtNASAMASExp2, aes(x = Timeframe, y = mean_Accuracy, group = Scenario, colour = Scenario))+
   geom_line(aes(x = Timeframe, y = mean_Accuracy))+
@@ -94,7 +94,7 @@ ggsave(filename = "Figure4-NBACK.jpg",width = 10.5, height = 16.5, unit = "cm", 
 
 
 
-##############Linear Mixed Model Analysis
+##### Linear Mixed Model Analysis
 
 PVTNBACKNASATCExp2[, `:=` (
   Scenario = as.factor(Scenario),               
