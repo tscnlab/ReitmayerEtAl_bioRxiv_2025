@@ -49,7 +49,7 @@ by(summary_QuestExp2$median_MAS.comfort,summary_QuestExp2$Scenario, shapiro.test
 model = aov(median_MAS.comfort ~ Scenario, data = summary_QuestExp2)
 summary(model)
 
-
+##### Code for Figures
 
 (MAS.comfortmeansd = ggplot(summary_QuestExp2, aes(x = Timeframe, y = mean_MAS.comfort, group = Scenario, colour = Scenario))+ #summary_QuestExp2[!is_outlier(summary_QuestExp2$mean_MAS.comfort, coef= 1.5)]
   geom_line(aes(x = Timeframe, y = mean_MAS.comfort))+
@@ -110,7 +110,7 @@ ggsave(filename = "Figure8-MASTense.jpg",width = 10.5, height = 16.5, unit = "cm
  
 
 
-##############Linear Mixed Model Analysis
+##### Linear Mixed Model Analysis
 
 
 PVTNBACKNASATCExp2[, `:=` (
