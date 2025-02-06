@@ -31,6 +31,8 @@ model = aov(median_KSS ~ Scenario, data = summary_dtKSS)
 summary(model)
 
 
+##### Code for Figures
+
 (KSSmeansd = ggplot(summary_dtKSS, aes(x = Timeframe, y = mean_KSS, group = Scenario, colour = Scenario))+
   geom_line()+
   geom_ribbon(aes(ymin = mean_KSS - sd_KSS, ymax = mean_KSS + sd_KSS, fill = Scenario),alpha = 0.6, linewidth = 0.25)+
@@ -88,7 +90,7 @@ ggsave(filename = "Figure10-KSS.jpg",width = 10.5, height = 16.5, unit = "cm", d
 
 
 
-##############Linear Mixed Model Analysis
+##### Linear Mixed Model Analysis
 
 KSSExp2[, `:=` (
   Scenario = as.factor(Scenario),               
