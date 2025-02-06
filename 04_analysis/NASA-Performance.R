@@ -51,7 +51,7 @@ by(summary_QuestExp2$median_Success,summary_QuestExp2$Scenario, shapiro.test)
 model = aov(median_Success ~ Scenario, data = summary_QuestExp2)
 summary(model)
 
-
+##### Code for Figures
 
 (Successmeansd = ggplot(summary_QuestExp2, aes(x = Timeframe, y = mean_Success, group = Scenario, colour = Scenario))+ #summary_QuestExp2[!is_outlier(summary_QuestExp2$mean_Success, coef= 1.5)]
   geom_line(aes(x = Timeframe, y = mean_Success))+
@@ -111,7 +111,7 @@ ggsave(filename = "Figure7-NASATLXPerf.jpg",width = 10.5, height = 16.5, unit = 
 
 
 
-##############Linear Mixed Model Analysis
+##### Linear Mixed Model Analysis
 
 
 PVTNBACKNASATCExp2[, `:=` (
