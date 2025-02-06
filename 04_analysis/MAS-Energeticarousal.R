@@ -49,7 +49,7 @@ by(summary_QuestExp2$median_MAS.alertness,summary_QuestExp2$Scenario, shapiro.te
 model = aov(median_MAS.alertness ~ Scenario, data = summary_QuestExp2)
 summary(model)
 
-
+##### Code for Figures
 
 (MAS.alertnessmeansd = ggplot(summary_QuestExp2, aes(x = Timeframe, y = mean_MAS.alertness, group = Scenario, colour = Scenario))+ #summary_QuestExp2[!is_outlier(summary_QuestExp2$mean_MAS.alertness, coef= 1.5)]
   geom_line(aes(x = Timeframe, y = mean_MAS.alertness))+
@@ -110,7 +110,7 @@ ggsave(filename = "Figure9-MASEnergetic.jpg",width = 10.5, height = 16.5, unit =
 
 
 
-##############Linear Mixed Model Analysis
+##### Linear Mixed Model Analysis
 
 
 PVTNBACKNASATCExp2[, `:=` (
