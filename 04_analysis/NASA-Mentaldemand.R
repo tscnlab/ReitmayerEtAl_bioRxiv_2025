@@ -50,7 +50,7 @@ by(summary_QuestExp2$median_Mental.demand,summary_QuestExp2$Scenario, shapiro.te
 model = aov(median_Mental.demand ~ Scenario, data = summary_QuestExp2)
 summary(model)
 
-
+##### Code for Figures
 
 (Mental.demandmeansd = ggplot(summary_QuestExp2, aes(x = Timeframe, y = mean_Mental.demand, group = Scenario, colour = Scenario))+ #summary_QuestExp2[!is_outlier(summary_QuestExp2$mean_Mental.demand, coef= 1.5)]
   geom_line(aes(x = Timeframe, y = mean_Mental.demand))+
@@ -111,7 +111,7 @@ ggsave(filename = "Figure5-NASATLXMental.jpg",width = 10.5, height = 16.5, unit 
 
 
 
-##############Linear Mixed Model Analysis
+##### Linear Mixed Model Analysis
 
 
 PVTNBACKNASATCExp2[, `:=` (
