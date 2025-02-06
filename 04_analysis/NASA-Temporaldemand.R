@@ -51,7 +51,7 @@ by(summary_QuestExp2$median_Temporal.demand,summary_QuestExp2$Scenario, shapiro.
 model = aov(median_Temporal.demand ~ Scenario, data = summary_QuestExp2)
 summary(model)
 
-
+##### Code for Figures
 
 (Temporal.demandmeansd = ggplot(summary_QuestExp2, aes(x = Timeframe, y = mean_Temporal.demand, group = Scenario, colour = Scenario))+ #summary_QuestExp2[!is_outlier(summary_QuestExp2$mean_Temporal.demand, coef= 1.5)]
   geom_line(aes(x = Timeframe, y = mean_Temporal.demand))+
@@ -110,7 +110,7 @@ ggarrange(NULL, Temporal.demandMedianAll, NULL, Temporal.demandmeansd, hjust = -
 ggsave(filename = "Figure6-NASATLXTemporal.jpg",width = 10.5, height = 16.5, unit = "cm", dpi =350)
 
 
-##############Linear Mixed Model Analysis
+##### Linear Mixed Model Analysis
 
 
 PVTNBACKNASATCExp2[, `:=` (
