@@ -88,27 +88,3 @@ print(KSSMeanKSSAll)
 
 ggarrange(KSSMeanKSSAll, NULL, KSSMedianKSSAll, nrow =3, heights = c(2.1,0.05, 2.0), common.legend = TRUE, legend = "bottom",labels = c("A", "B"), font.label = list(size=10)) #hjust = -0.1, vjust = 1.2, 
 ggsave(filename = "KSS.jpg",width = 10.5, height = 16.5, unit = "cm", dpi =350)
-
-
-
-##############Linear Mixed Model Analysis
-
-KSSExp2[, `:=` (
-  Scenario = as.factor(Scenario),               
-  Timeframe = as.factor(Timeframe),
-  ID = as.factor(ID),
-  KSS = as.numeric(KSS)
-)]
-
-
-formula = "median_KSS ~ top_mean  + (1|Scenario) "
-model = lmer(formula = formula, data = summary_dtKSS)
-summary(model)
-AIC(model)
-BIC(model)
-
-num_fixed_effects <- length(fixef(model))
-p_values <- summary(model)$coefficients[, "Pr(>|t|)"]
-p_values_corrected <- p.adjust(p_values, method = "bonferroni", n = num_fixed_effects)
-p_values_corrected
-
