@@ -76,8 +76,6 @@ by(summary_dtNASAMASExp2$mean_Accuracy,summary_dtNASAMASExp2$top_mean, shapiro.t
 
 model = aov(mean_Accuracy ~ top_mean, data = summary_dtNASAMASExp2)
 summary(model)
-k
-
 
 (NbackmeansdScen=ggplot(summary_dtNASAMASExp2, aes(x = top_mean, y = mean_Accuracy)) + 
     geom_point(summary_dtNASAMASExp2, mapping=aes(x = top_mean, y = mean_Accuracy, group = Scenario, colour = Scenario))+ 
