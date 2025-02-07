@@ -110,7 +110,7 @@ The analysis process for each parameter (task results PVT and N-back/questionnai
   <img src="https://github.com/tscnlab/ReitmayerEtAl_ProcRSocB_2025/blob/main/05_graphs/Figure3-PVT.jpg" width="480">
 </p>
 <p align="center">
-  Figure 3 as an example of graphical output after running the code.
+  PVT by scenario (A) and time (B) as an example of graphical output after running the code (Figure 3).
 </p>
 
 While the specific parameters and variable names differ for each parameter, the overall structure and analysis approach remain consistent across all R files.
