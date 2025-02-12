@@ -80,8 +80,8 @@ summary(model)
 (NbackmeansdScen=ggplot(summary_dtNASAMASExp2, aes(x = top_mean, y = mean_Accuracy)) + 
     geom_point(summary_dtNASAMASExp2, mapping=aes(x = top_mean, y = mean_Accuracy, group = Scenario, colour = Scenario))+ 
     geom_smooth(summary_dtNASAMASExp2, mapping=aes(ymin = mean_Accuracy - sd_Accuracy, ymax = mean_Accuracy + sd_Accuracy), color="#999999", span=2)+ 
-    stat_regline_equation(label.y = 170,size =3.5) +
-    stat_cor(label.y = 150,size =3.5) +
+    stat_regline_equation(label.y = 0.72,size =3.5) +
+    stat_cor(label.y = 0.7,size =3.5) +
     geom_vline(data=Temp, aes(xintercept = mean_top_mean, colour = as.factor(Scenario)),linetype="dashed")+
     facet_wrap(~Scenario, nrow = 1)+
     labs(#title = ""N-back Test",
