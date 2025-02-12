@@ -147,7 +147,7 @@ This analysis follows these steps:
 The following R files generate supplementary figures:
 
 - `PVT_thermal.R`
-- `NBACK_thermal`
+- `NBACK_thermal.R`
 - `KSS_thermal.R`
 
 These scripts utilise `data_thermal.csv`, which includes environmental data, particularly operative temperature. This additional data allows for the exploration of potential relationships between thermal conditions and the parameters PVT, N-back, KSS.
