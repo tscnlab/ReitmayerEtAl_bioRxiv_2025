@@ -87,4 +87,4 @@ print(KSSMeanKSSAll)
 
 
 ggarrange(KSSMeanKSSAll, NULL, KSSMedianKSSAll, nrow =3, heights = c(2.1,0.05, 2.0), common.legend = TRUE, legend = "bottom",labels = c("A", "B"), font.label = list(size=10)) #hjust = -0.1, vjust = 1.2, 
-ggsave(filename = "KSS.jpg",width = 10.5, height = 16.5, unit = "cm", dpi =350)
+ggsave(filename = "KSS.jpg",width = 20.5, height = 16.5, unit = "cm", dpi =350)
