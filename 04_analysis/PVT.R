@@ -99,6 +99,9 @@ ggsave(filename = "Figure3-PVT.jpg",width = 10.5, height = 16.5, unit = "cm", dp
 
 
 ##### Linear Mixed Model Analysis
+PVTNBACKNASATCExp2 = fread("data.csv")
+PVTNBACKNASATCExp2 = PVTNBACKNASATCExp2[ID != 103]
+PVTNBACKNASATCExp2 = PVTNBACKNASATCExp2[!is_outlier(PVTNBACKNASATCExp2$Mean.RT, coef = 1.5) & !is.na(PVTNBACKNASATCExp2$Mean.RT), ]
 
 PVTNBACKNASATCExp2[, `:=` (
   Scenario = as.factor(Scenario),               
