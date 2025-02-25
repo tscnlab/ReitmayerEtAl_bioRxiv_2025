@@ -44,7 +44,7 @@ Each assessment parameter has its own R file for processing, statistical calcula
 - `MAS-Energeticarousal.R`: Momentary Affect Scale energetic arousal subscale analysis and plots
 - `MAS-Tensearousal.R`: Momentary Affect Scale tense arousal subscale analysis and plots
 - `KSS.R`: Karolinska Sleepiness Scale analysis and plots
-- `ClimateDataperSession.Python`: Visualisation of operative temperature and ambient lux levels per participant/session
+- `ClimateDataperSession.py`: Visualisation of operative temperature and ambient lux levels per participant/session
 
 ### Data integration and preparation
 
@@ -150,7 +150,7 @@ The following files generate supplementary figures:
 - `PVT_thermal.R`
 - `NBACK_thermal.R`
 - `KSS_thermal.R`
-- `ClimateDataperSession.Python`
+- `ClimateDataperSession.py`
 
 The R scripts utilise `data_thermal.csv`, which includes environmental data, particularly operative temperature. This additional data allows for the exploration of potential relationships between thermal conditions and the parameters PVT, N-back, KSS.
 
@@ -215,8 +215,15 @@ As with previous analyses, participant ID 103 and outliers are excluded. The scr
   Participant ID's 104-106 as an example of graphical output after running the code.
 </p>
 
-The Python file `ClimateDataperSession.Python` generates the supplementary figure `Supplementary_OpTemp-Light.png` using environmental data from `TimeClimaAct.csv`. The code calculates operative temperature, computes mean and standard deviation of temperature, humidity, and light parameters by session ID, and exports the processed statistics to '99_ClimaStatsperSession_luxtop.csv'.
+The Python file `ClimateDataperSession.py` generates the supplementary figure `Supplementary_OpTemp-Light.png` using environmental data from `TimeClimaAct.csv`. The code calculates operative temperature, computes mean and standard deviation of temperature, humidity, and light parameters by session ID, and exports the processed statistics to '99_ClimaStatsperSession_luxtop.csv'.
 The visualisation presents a two-panel figure with operative temperature (top panel) and ambient light levels (bottom panel, log scale). Data points represent means across participant sessions with error bars showing standard deviation, organised by scenario and participant ID.
+
+<p align="center">
+  <img src="https://github.com/tscnlab/ReitmayerEtAl_ProcRSocB_2025/blob/main/05_graphs/Supplementary_OpTemp-Light.png" width="480">
+</p>
+<p align="center">
+  Operative tempearture and ambient lux levels per participant and session.
+</p>
 
 ## Graphs
 
