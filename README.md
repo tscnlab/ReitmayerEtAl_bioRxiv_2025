@@ -222,7 +222,7 @@ The visualisation presents a two-panel figure with operative temperature (top pa
   <img src="https://github.com/tscnlab/ReitmayerEtAl_ProcRSocB_2025/blob/main/05_graphs/Supplementary_OpTemp-Light.png" width="480">
 </p>
 <p align="center">
-  Operative tempearture and ambient lux levels per participant and session.
+  Operative temperature and ambient lux levels per participant and session.
 </p>
 
 ## Graphs
