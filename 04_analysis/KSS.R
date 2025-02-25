@@ -91,6 +91,9 @@ ggsave(filename = "Figure10-KSS.jpg",width = 10.5, height = 16.5, unit = "cm", d
 
 
 ##### Linear Mixed Model Analysis
+KSSExp2 = fread("data.csv")
+KSSExp2 = KSSExp2[ID != 103]
+KSSExp2 = KSSExp2[!is_outlier(KSSExp2$KSS, coef = 1.5) & !is.na(KSSExp2$KSS), ]
 
 KSSExp2[, `:=` (
   Scenario = as.factor(Scenario),               
