@@ -187,5 +187,5 @@ for i in range(0, num_points, 4):
 # Final layout adjustments and saving the plot
 plt.tight_layout()
 plt.subplots_adjust(bottom=0.25)  # Adjust the bottom margin to accommodate custom x-tick labels
-plt.savefig('top_lux.png')
+plt.savefig('Supplementary_OpTemp-Light.png')
 plt.show()
