@@ -111,7 +111,9 @@ ggsave(filename = "Figure9-MASEnergetic.jpg",width = 10.5, height = 16.5, unit =
 
 
 ##### Linear Mixed Model Analysis
-
+PVTNBACKNASATCExp2 = fread("data.csv")
+PVTNBACKNASATCExp2 = PVTNBACKNASATCExp2[ID != 103]
+PVTNBACKNASATCExp2 = PVTNBACKNASATCExp2[!is_outlier(PVTNBACKNASATCExp2$MAS.alertness.original, coef = 1.5) & !is.na(PVTNBACKNASATCExp2$MAS.alertness.original), ]
 
 PVTNBACKNASATCExp2[, `:=` (
   Scenario = as.factor(Scenario),               
