@@ -112,7 +112,9 @@ ggsave(filename = "Figure5-NASATLXMental.jpg",width = 10.5, height = 16.5, unit 
 
 
 ##### Linear Mixed Model Analysis
-
+PVTNBACKNASATCExp2 = fread("data.csv")
+PVTNBACKNASATCExp2 = PVTNBACKNASATCExp2[ID != 103]
+PVTNBACKNASATCExp2 = PVTNBACKNASATCExp2[!is_outlier(PVTNBACKNASATCExp2$Mental.demand, coef = 1.5) & !is.na(PVTNBACKNASATCExp2$Mental.demand), ]
 
 PVTNBACKNASATCExp2[, `:=` (
   Scenario = as.factor(Scenario),               
