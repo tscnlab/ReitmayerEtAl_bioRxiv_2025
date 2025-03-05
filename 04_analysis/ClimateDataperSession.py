@@ -8,9 +8,7 @@ import os
 import pandas as pd
 import matplotlib.pyplot as plt
 from matplotlib.ticker import LogLocator
-
-# Set the working directory
-os.chdir(r'\\workinddirection')
+import numpy as np
 
 # Read the CSV file once
 df = pd.read_csv('TimeClimaAct.csv')
@@ -18,9 +16,9 @@ df = pd.read_csv('TimeClimaAct.csv')
 # Calculate the 'top' variable as the average of 'tdb' and 'tg'
 df['top'] = (df['tdb'] + df['tg']) / 2
 
-df = df[df['Exclude'] == 0]
+df = df[(df['Exclude'] == 0) & (df['AMB LIGHT_lux'] >= 0.1)]
 
-# Extract unique session information (assuming Participant and Scenario are constant per SessionID)
+# Extract unique session information
 session_info = df[['SessionID', 'Participant', 'Scenario']].drop_duplicates()
 
 # Compute aggregated climate statistics for 'tdb', 'tg', 'rh', and 'top'
@@ -54,8 +52,10 @@ merged_df.to_csv('99_ClimaStatsperSession_luxtop.csv', index=False)
 #%% Plot and save
 df = merged_df.copy()
 color = 'black'
-capsize = 5
-markersize = 5
+capsize = 3
+markersize = 4
+colour_temp = '#e63946'
+colour_light = '#3a86ff'
 
 # Ensure 'Participant' and 'Scenario' are strings
 df['Participant'] = df['Participant'].astype(str)
@@ -104,23 +104,22 @@ axs[1].errorbar(
     yerr=df['lux_std'],
     fmt='o',
     color=color,
-    ecolor='blue',
+    ecolor=colour_light,
     capsize=capsize,
     markersize=markersize,
-    label='Ambient light mean±std'
+    label='Ambient light mean±std (clipped)'
 )
 axs[1].set_ylabel('Ambient Light (lx)')
 axs[1].set_xlabel('Participant')
 axs[1].legend(loc='upper right', frameon=False)  # remove legend frame
 axs[1].grid(True)
-axs[1].set_yscale('log')
+axs[1].set_yscale('log', nonpositive='clip')  # Prevents log errors
 axs[1].set_ylim(0, 10000)
 axs[1].yaxis.set_major_locator(LogLocator(base=10.0))
 axs[1].yaxis.set_major_formatter(plt.FuncFormatter(lambda y, _: '{:.0f}'.format(y)))
 for y_value in [1, 10, 100, 1000]:
     axs[1].axhline(y=y_value, color='black', linewidth=1, linestyle="--")
 
-# Remove default x-tick labels from the second subplot
 axs[1].set_xticks([])
 
 # Add custom x-tick labels using text (rotated Scenario labels with Participant every 4th data point)
@@ -148,9 +147,9 @@ for i, (x, scenario, participant_id) in enumerate(zip(x_positions, df['Scenario'
             transform=axs[1].get_xaxis_transform()
         )
 
-# Move the x-axis label further down (adjust the y-coordinate as needed)
+# Move the x-axis label further down 
 axs[1].xaxis.set_label_coords(0.5, -0.2)
-axs[1].set_xlabel("Participant ID", labelpad=20)  # Adjust labelpad to move it down
+axs[1].set_xlabel("Participant ID", labelpad=1)  
 
 # Adjust x-axis limits to ensure labels are visible
 axs[1].set_xlim(df['plot_index'].min() - 1, df['plot_index'].max() + 1)
@@ -186,6 +185,6 @@ for i in range(0, num_points, 4):
 
 # Final layout adjustments and saving the plot
 plt.tight_layout()
-plt.subplots_adjust(bottom=0.25)  # Adjust the bottom margin to accommodate custom x-tick labels
+plt.subplots_adjust(bottom=0.1)  
 plt.savefig('Supplementary_OpTemp-Light.png')
 plt.show()
