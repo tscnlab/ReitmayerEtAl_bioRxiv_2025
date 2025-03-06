@@ -15,7 +15,7 @@ For any questions, comments, or feedback, please contact Manuel Spitschan at man
 
 Folder: `01_rawdata`
 
-This folder contains the raw data for climate measurements and cognitive performance test results (N-back and PVT) for each participant and session. The data for each test type is stored in a CSV file.
+This folder contains the raw data for climate measurements and cognitive performance test results (N-back and PVT) for each participant and session. The data for each test type is stored in a CSV file. Additionally, it includes a folder named `Datatable for R`which contains comprehensive datasets (`data.csv` and `data_thermal.csv`) used for the data analysis.
 
 ## Questionnaire
 
@@ -54,7 +54,7 @@ The R scripts referenced above use a comprehensive dataset stored in `data.csv`.
 2. Questionnaire responses (Folder: `02_questionnaire`): KSS, MAS, and NASA-TLX
 3. Demographic information (Folder: `03_demographics`)
 
-We manually aggregated these data using Microsoft Excel to create a single, unified dataset. The resulting `data.csv` file contains detailed records for each participant (ID: 101-116) across all time points (Timeframe: 1-10) and experimental sessions (Scenario: 1, 10, 100, 1000) including responses of NASA-TLX, MAS and KSS questionnaires as well as results of the performance tasks.
+We manually aggregated these data using Microsoft Excel to create a single, unified dataset. The resulting `data.csv` file contains detailed records for each participant (ID: 101-116) across all time points (Timeframe: 1-10) and experimental sessions (Scenario: 1, 10, 70, 595) including responses of NASA-TLX, MAS and KSS questionnaires as well as results of the performance tasks.
 
 ### Data processing
 
