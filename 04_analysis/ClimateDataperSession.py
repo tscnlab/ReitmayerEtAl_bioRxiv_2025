@@ -51,6 +51,10 @@ merged_df.to_csv('99_ClimaStatsperSession_luxtop.csv', index=False)
 
 #%% Plot and save
 df = merged_df.copy()
+
+# Update the 'Scenario' column values into mEDI values
+df['Scenario'] = df['Scenario'].replace({1: 1, 10: 10, 100: 70, 1000: 595}).astype(int).astype(str)
+
 color = 'black'
 capsize = 3
 markersize = 4
@@ -117,7 +121,7 @@ axs[1].set_yscale('log', nonpositive='clip')  # Prevents log errors
 axs[1].set_ylim(0, 10000)
 axs[1].yaxis.set_major_locator(LogLocator(base=10.0))
 axs[1].yaxis.set_major_formatter(plt.FuncFormatter(lambda y, _: '{:.0f}'.format(y)))
-for y_value in [1, 10, 100, 1000]:
+for y_value in [1, 10, 70, 595]:
     axs[1].axhline(y=y_value, color='black', linewidth=1, linestyle="--")
 
 axs[1].set_xticks([])
