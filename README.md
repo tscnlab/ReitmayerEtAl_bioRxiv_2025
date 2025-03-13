@@ -1,12 +1,12 @@
 <img src="https://avatars.githubusercontent.com/u/78920096?s=200&v=4" width="100"/>
 
-# ReitmayerEtAl_xxx_2025
+# ReitmayerEtAl_bioRxiv_2025
 
 # Non-linear relationship between evening light exposure and cognitive performance
 
 This README file provides an overview of the dataset and R code used in our paper, "Non-linear Relationship Between Evening Light Exposure and Cognitive Performance". The data analysis was performed using R, encompassing data cleaning, statistical analysis, and plotting.
 
-All materials are made publicly available under [??].
+All materials are made publicly available under an open-source (GPL) or open-access license (CC-BY).
 
 For any questions, comments, or feedback, please contact Manuel Spitschan at manuel.spitschan@tum.de.
 
