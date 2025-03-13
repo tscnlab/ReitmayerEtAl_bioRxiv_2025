@@ -1,6 +1,6 @@
 <img src="https://avatars.githubusercontent.com/u/78920096?s=200&v=4" width="100"/>
 
-# ReitmayerEtAl_RSocOpenSci_2025
+# ReitmayerEtAl_xxx_2025
 
 # Non-linear relationship between evening light exposure and cognitive performance
 
