@@ -21,7 +21,7 @@ dtNASAMASExp2 = dtNASAMASExp2[, Scenario := fcase(Scenario == 1, 1.10,
 
 dtNASAMASExp2[, `:=` (
   Scenario = as.factor(Scenario),
-  Timeframe = as.factor(Timeframe),
+  Timepoint = as.factor(Timepoint),
   ID = as.factor(ID),
   MAS.comfort = as.numeric(MAS.comfort),
   MAS.alertness = as.numeric(MAS.alertness),
@@ -45,7 +45,7 @@ summary_QuestExp2 = dtNASAMASExp2[, .(mean_Mental.demand = mean(Mental.demand, n
                                       mean_MAS.alertness = mean(MAS.alertness, na.rm = TRUE),
                                       sd_MAS.alertness = sd(MAS.alertness, na.rm = TRUE),
                                       median_MAS.alertness = median(MAS.alertness, na.rm = TRUE)),
-                                  by = .(Timeframe,Scenario)]
+                                  by = .(Timepoint,Scenario)]
 
 
 by(summary_QuestExp2$median_Temporal.demand,summary_QuestExp2$Scenario, shapiro.test)
@@ -55,8 +55,8 @@ summary(model)
 
 
 
-(Temporal.demandmeansd = ggplot(summary_QuestExp2, aes(x = Timeframe, y = mean_Temporal.demand, group = Scenario, colour = Scenario))+ #summary_QuestExp2[!is_outlier(summary_QuestExp2$mean_Temporal.demand, coef= 1.5)]
-  geom_line(aes(x = Timeframe, y = mean_Temporal.demand))+
+(Temporal.demandmeansd = ggplot(summary_QuestExp2, aes(x = Timepoint, y = mean_Temporal.demand, group = Scenario, colour = Scenario))+ #summary_QuestExp2[!is_outlier(summary_QuestExp2$mean_Temporal.demand, coef= 1.5)]
+  geom_line(aes(x = Timepoint, y = mean_Temporal.demand))+
   geom_ribbon(aes(ymin = mean_Temporal.demand - sd_Temporal.demand, ymax = mean_Temporal.demand + sd_Temporal.demand, fill = Scenario),alpha = 0.6, linewidth = 0.25)+
   scale_y_continuous(breaks = seq(1,20,1), limits = c(1,20), labels = c("1\nVery\nlow","","","","","","","","", "10","","","","","","","","","", "20\nVery\nhigh"))+
   scale_x_discrete(labels = c("1","","","", "5","","","","", "10"))+
@@ -126,7 +126,7 @@ PVTNBACKNASATCExp2 = PVTNBACKNASATCExp2[, Scenario := fcase(Scenario == 1, 1.10,
 
 
 PVTNBACKNASATCExp2[, `:=` (              
-  Timeframe = as.factor(Timeframe),
+  Timepoint = as.factor(Timepoint),
   ID = as.factor(ID),
   Means.correct.responses = as.numeric(Means.correct.responses),
   Medians.correct.responses = as.numeric(Medians.correct.responses),
@@ -147,10 +147,10 @@ PVTNBACKNASATCExp2[, `:=` (
 
 PVTNBACKNASATCExp2[, `:=` (
   Scenario = as.numeric(log10(Scenario)), 
-  Timeframe = as.numeric(Timeframe)
+  Timepoint = as.numeric(Timepoint)
 )]
 
-formula = "Temporal.demand ~ Scenario + I(Scenario^2) + Timeframe + Timeframe:Scenario + (1|ID)"
+formula = "Temporal.demand ~ Scenario + I(Scenario^2) + Timepoint + Timepoint:Scenario + (1|ID)"
 model = lmer(formula = formula, data = PVTNBACKNASATCExp2)
 summary(model)
 AIC(model)
