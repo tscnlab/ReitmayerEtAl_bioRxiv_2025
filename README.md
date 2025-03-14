@@ -15,7 +15,7 @@ For any questions, comments, or feedback, please contact Manuel Spitschan at man
 
 Folder: `01_rawdata`
 
-This folder contains the raw data for climate measurements and cognitive performance test results (N-back and PVT) for each participant and session. The data for each test type is stored in a CSV file. Additionally, it includes a folder named `Datatable for R`which contains comprehensive datasets (`data.csv` and `data_thermal.csv`) used for the data analysis.
+This folder contains the raw data for climate measurements and cognitive performance tests conducted during the experiment. Subfolders include `Climate` (containing environmental data files), Datatable for R (containing the comprehensive datasets `data.csv` and `data_thermal.csv` used for all statistical analyses), NASA-TLX (workload assessments), and PVT (psychomotor vigilance test results). All data is organised by participant, time point and session for subsequent analysis.
 
 ## Questionnaire
 
