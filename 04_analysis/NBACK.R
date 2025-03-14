@@ -25,13 +25,13 @@ summary_dtNASAMASExp2 = PVTNBACKNASATCExp2[, .(mean_Accuracy = mean(Accuracy, na
                                           mean_Correct.responses = mean(Means.correct.responses, na.rm = TRUE),
                                           sd_Correct.responses = sd(Means.correct.responses, na.rm = TRUE),
                                           median_Correct.responses = median(Medians.correct.responses, na.rm = TRUE)),
-                                      by = .(Timeframe,Scenario)]
+                                      by = .(Timepoint,Scenario)]
 
 
 
 summary_dtNASAMASExp2[, `:=` (
   Scenario = as.factor(Scenario),
-  Timeframe = as.factor(Timeframe)
+  Timepoint = as.factor(Timepoint)
 )]
 
 
@@ -42,8 +42,8 @@ summary(model)
 
 
 
-(Nbackmeansd = ggplot(summary_dtNASAMASExp2, aes(x = Timeframe, y = mean_Accuracy, group = Scenario, colour = Scenario))+
-  geom_line(aes(x = Timeframe, y = mean_Accuracy))+
+(Nbackmeansd = ggplot(summary_dtNASAMASExp2, aes(x = Timepoint, y = mean_Accuracy, group = Scenario, colour = Scenario))+
+  geom_line(aes(x = Timepoint, y = mean_Accuracy))+
   geom_ribbon(aes(ymin = mean_Accuracy - sd_Accuracy, ymax = mean_Accuracy + sd_Accuracy, fill = Scenario),alpha = 0.6, linewidth = 0.25)+
   scale_y_continuous(breaks = seq(0.7,1,0.1), limits = c(0.7,1.02),label = scales::percent)+
   scale_x_discrete(labels = c("1","","","", "5","","","","", "10"))+
@@ -113,7 +113,7 @@ PVTNBACKNASATCExp2 = PVTNBACKNASATCExp2[, Scenario := fcase(Scenario == 1, 1.10,
 
 
 PVTNBACKNASATCExp2[, `:=` (             
-  Timeframe = as.factor(Timeframe),
+  Timepoint = as.factor(Timepoint),
   ID = as.factor(ID),
   Means.correct.responses = as.numeric(Means.correct.responses),
   Medians.correct.responses = as.numeric(Medians.correct.responses),
@@ -133,10 +133,10 @@ PVTNBACKNASATCExp2[, `:=` (
 
 PVTNBACKNASATCExp2[, `:=` (
   Scenario = as.numeric(log10(Scenario)), 
-  Timeframe = as.numeric(Timeframe)
+  Timepoint = as.numeric(Timepoint)
 )]
 
-formula = "Accuracy ~ Scenario + I(Scenario^2) + Timeframe + Timeframe:Scenario + (1|ID)" 
+formula = "Accuracy ~ Scenario + I(Scenario^2) + Timepoint + Timepoint:Scenario + (1|ID)" 
 model = lmer(formula = formula, data = PVTNBACKNASATCExp2)
 summary(model)
 AIC(model)
