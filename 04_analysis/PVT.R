@@ -25,13 +25,13 @@ summary_dtPVT = PVTNBACKNASATCExp2[, .(mean_RT = mean(Mean.RT, na.rm = TRUE),
                           median_RT = median(Median.RT, na.rm = TRUE),
                           mean_Error = mean(Total.Errors, na.rm = TRUE),
                           sd_Error = sd(Total.Errors, na.rm = TRUE),
-                          median_Error = median(Total.Errors, na.rm = TRUE)),by = .(Timeframe,Scenario)]
+                          median_Error = median(Total.Errors, na.rm = TRUE)),by = .(Timepoint,Scenario)]
 
 
 
 summary_dtPVT[, `:=` (
   Scenario = as.factor(Scenario),
-  Timeframe = as.factor(Timeframe)
+  Timepoint = as.factor(Timepoint)
 )]
 
 
@@ -43,7 +43,7 @@ model = aov(median_Error ~ Scenario, data = summary_dtPVT)
 summary(model)
 
 
-(PVTmeansd = ggplot(summary_dtPVT, aes(x = Timeframe, y = mean_RT, group = Scenario, colour = Scenario))+
+(PVTmeansd = ggplot(summary_dtPVT, aes(x = Timepoint, y = mean_RT, group = Scenario, colour = Scenario))+
   geom_line()+
   geom_ribbon(aes(ymin = mean_RT - sd_RT, ymax =  mean_RT + sd_RT, fill = Scenario),alpha = 0.6, linewidth = 0.25)+
   scale_y_continuous(breaks = seq(150,450,50), limits = c(150,450), oob = scales::squish)+
@@ -114,7 +114,7 @@ PVTNBACKNASATCExp2 = PVTNBACKNASATCExp2[, Scenario := fcase(Scenario == 1, 1.10,
                                       Scenario == 1000, 593)]
 
 PVTNBACKNASATCExp2[, `:=` (              
-  Timeframe = as.factor(Timeframe),
+  Timepoint = as.factor(Timepoint),
   ID = as.factor(ID),
   Means.correct.responses = as.numeric(Means.correct.responses),
   Medians.correct.responses = as.numeric(Medians.correct.responses),
@@ -135,10 +135,10 @@ PVTNBACKNASATCExp2[, `:=` (
 
 PVTNBACKNASATCExp2[, `:=` (
   Scenario = as.numeric(log10(Scenario)), 
-  Timeframe = as.numeric(Timeframe)
+  Timepoint = as.numeric(Timepoint)
 )]
 
-formula = "Mean.RT ~ Scenario + I(Scenario^2) + Timeframe + Timeframe:Scenario + (1|ID)"
+formula = "Mean.RT ~ Scenario + I(Scenario^2) + Timepoint + Timepoint:Scenario + (1|ID)"
 model = lmer(formula = formula, data = PVTNBACKNASATCExp2)
 summary(model)
 AIC(model)
