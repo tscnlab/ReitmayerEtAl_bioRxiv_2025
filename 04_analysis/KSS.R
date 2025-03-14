@@ -22,11 +22,11 @@ KSSExp2 = KSSExp2[, Scenario := fcase(Scenario == 1, 1.10,
 
 summary_dtKSS = KSSExp2[, .(mean_KSS = mean(KSS, na.rm = TRUE),
                           sd_KSS = sd(KSS, na.rm = TRUE),
-                          median_KSS = median(KSS, na.rm = TRUE)),by = .(Timeframe,Scenario)]
+                          median_KSS = median(KSS, na.rm = TRUE)),by = .(Timepoint,Scenario)]
 
 summary_dtKSS[, `:=` (
   Scenario = as.factor(Scenario),
-  Timeframe = as.factor(Timeframe)
+  Timepoint = as.factor(Timepoint)
 )]
 
 
@@ -36,7 +36,7 @@ model = aov(median_KSS ~ Scenario, data = summary_dtKSS)
 summary(model)
 
 
-(KSSmeansd = ggplot(summary_dtKSS, aes(x = Timeframe, y = mean_KSS, group = Scenario, colour = Scenario))+
+(KSSmeansd = ggplot(summary_dtKSS, aes(x = Timepoint, y = mean_KSS, group = Scenario, colour = Scenario))+
   geom_line()+
   geom_ribbon(aes(ymin = mean_KSS - sd_KSS, ymax = mean_KSS + sd_KSS, fill = Scenario),alpha = 0.6, linewidth = 0.25)+
   #scale_y_continuous(breaks = c(1, 5, 9), limits = c(1,11), labels = c("1\nExtremely\nalert","5","9\nExtremely\nsleepy"))+
@@ -107,7 +107,7 @@ KSSExp2 = KSSExp2[, Scenario := fcase(Scenario == 1, 1.10,
                                       Scenario == 100, 69.1,
                                       Scenario == 1000, 593)]
 KSSExp2[, `:=` (               
-  Timeframe = as.factor(Timeframe),
+  Timepoint = as.factor(Timepoint),
   ID = as.factor(ID),
   KSS = as.numeric(KSS)
 )]
@@ -115,10 +115,10 @@ KSSExp2[, `:=` (
 
 KSSExp2[, `:=` (
   Scenario = as.numeric(log10(Scenario)), 
-  Timeframe = as.numeric(Timeframe)
+  Timepoint = as.numeric(Timepoint)
 )]
 
-formula = "KSS ~ Scenario + I(Scenario^2) + Timeframe + Timeframe:Scenario + (1|ID)"
+formula = "KSS ~ Scenario + I(Scenario^2) + Timepoint + Timepoint:Scenario + (1|ID)"
 model = lmer(formula = formula, data = KSSExp2)
 summary(model)
 AIC(model)
