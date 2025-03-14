@@ -54,7 +54,7 @@ The R scripts referenced above use a comprehensive dataset stored in `data.csv`.
 2. Questionnaire responses (Folder: `02_questionnaire`): KSS, MAS, and NASA-TLX
 3. Demographic information (Folder: `03_demographics`)
 
-We manually aggregated these data using Microsoft Excel to create a single, unified dataset. The resulting `data.csv` file contains detailed records for each participant (ID: 101-116) across all time points (Timeframe: 1-10) and experimental sessions (Scenario: 1, 10, 70, 595) including responses of NASA-TLX, MAS and KSS questionnaires as well as results of the performance tasks.
+We manually aggregated these data using Microsoft Excel to create a single, unified dataset. The resulting `data.csv` file contains detailed records for each participant (ID: 101-116) across all time points (Timepoint: 1-10) and experimental sessions (Scenario: 1, 10, 70, 595) including responses of NASA-TLX, MAS and KSS questionnaires as well as results of the performance tasks.
 
 ### Data processing
 
@@ -81,7 +81,7 @@ The analysis process for each parameter (task results PVT and N-back/questionnai
 
 1. Data summarisation:
    * Calculate mean, standard deviation, and median of the parameters
-   * Group data by Timeframe and Scenario
+   * Group data by Timepoint and Scenario
 
 2. Figure generation:
    Each figure consists of two main components:
@@ -125,19 +125,19 @@ This analysis follows these steps:
 1. Data preparation:
    * Convert relevant variables to appropriate data types (factor, numeric)
    * Apply log10 transformation to the Scenario variable
-   * Convert Timeframe to numeric
+   * Convert Timepoint to numeric
 
 2. Model formulation:
    * Dependent variable: Task results/questionnaire responses
    * Fixed effects:
      - Scenario (linear and quadratic terms)
-     - Timeframe
-     - Interaction between Timeframe and Scenario
+     - Timepoint
+     - Interaction between Timepoint and Scenario
    * Random effect: Participant ID
 
 3. Model fitting:
    * Use lmer function from lme4 package to fit the LMM
-   * Formula: "Measure ~ Scenario + I(Scenario^2) + Timeframe + Timeframe:Scenario + (1|ID)"
+   * Formula: "Measure ~ Scenario + I(Scenario^2) + Timepoint + Timepoint:Scenario + (1|ID)"
 
 4. Statistical inference:
    * Extract p-values for fixed effects
