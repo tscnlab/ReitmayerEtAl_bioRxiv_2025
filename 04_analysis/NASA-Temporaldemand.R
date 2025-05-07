@@ -150,7 +150,7 @@ PVTNBACKNASATCExp2[, `:=` (
   Timepoint = as.numeric(Timepoint)
 )]
 
-formula = "Temporal.demand ~ Scenario + I(Scenario^2) + Timepoint + Timepoint:Scenario + (1|ID)"
+formula = "Temporal.demand ~ Scenario + I(Scenario^2) + Timepoint + Timepoint:Scenario + (1 + Timepoint + Scenario + I(Scenario^2) | ID)"
 model = lmer(formula = formula, data = PVTNBACKNASATCExp2)
 summary(model)
 AIC(model)
@@ -158,6 +158,27 @@ BIC(model)
 
 num_fixed_effects <- length(fixef(model))
 p_values <- summary(model)$coefficients[, "Pr(>|t|)"]
-p_values_corrected <- p.adjust(p_values, method = "bonferroni", n = num_fixed_effects)
+p_values_corrected <- p.adjust(p_values, method = "BH")
 p_values_corrected
+
+isSingular(model, tol = 1e-4)
+
+
+TD1 <- lmer(Temporal.demand ~ Scenario + I(Scenario^2) + Timepoint + Timepoint:Scenario + (1 + Timepoint + Scenario + I(Scenario^2) | ID), data=PVTNBACKNASATCExp2)
+TD2 <- lmer(Temporal.demand ~ Scenario + I(Scenario^2) + Timepoint + Timepoint:Scenario + (1 + Timepoint + Scenario | ID), data=PVTNBACKNASATCExp2)
+TD3 <- lmer(Temporal.demand ~ Scenario + I(Scenario^2) + Timepoint + Timepoint:Scenario + (1 + Timepoint | ID), data=PVTNBACKNASATCExp2)
+TD4 <- lmer(Temporal.demand ~ Scenario + I(Scenario^2) + Timepoint + Timepoint:Scenario + (1 | ID), data=PVTNBACKNASATCExp2)
+
+anova(TD1, TD2, TD3, TD4)
+
+isSingular(TD1, tol = 1e-4)
+isSingular(TD2, tol = 1e-4)
+isSingular(TD3, tol = 1e-4)
+isSingular(TD4, tol = 1e-4)
+
+anova(TD1, TD2)
+anova(TD1, TD3)
+anova(TD1, TD4)
+anova(TD2, TD3)
+anova(TD3, TD4)
 
