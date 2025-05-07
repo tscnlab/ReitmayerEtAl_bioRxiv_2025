@@ -150,7 +150,7 @@ PVTNBACKNASATCExp2[, `:=` (
   Timepoint = as.numeric(Timepoint)
 )]
 
-formula = "MAS.alertness.original ~ Scenario + I(Scenario^2) + Timepoint + Timepoint:Scenario + (1|ID)"
+formula = "MAS.alertness.original ~ Scenario + I(Scenario^2) + Timepoint + Timepoint:Scenario + (1 + Timepoint + Scenario + I(Scenario^2) | ID)"
 model = lmer(formula = formula, data = PVTNBACKNASATCExp2)
 summary(model)
 AIC(model)
@@ -158,6 +158,27 @@ BIC(model)
 
 num_fixed_effects <- length(fixef(model))
 p_values <- summary(model)$coefficients[, "Pr(>|t|)"]
-p_values_corrected <- p.adjust(p_values, method = "bonferroni", n = num_fixed_effects)
+p_values_corrected <- p.adjust(p_values, method = "BH")
 p_values_corrected
 
+
+isSingular(model, tol = 1e-4)
+
+
+EA1 <- lmer(MAS.alertness.original ~ Scenario + I(Scenario^2) + Timepoint + Timepoint:Scenario + (1 + Timepoint + Scenario + I(Scenario^2) | ID), data=PVTNBACKNASATCExp2)
+EA2 <- lmer(MAS.alertness.original ~ Scenario + I(Scenario^2) + Timepoint + Timepoint:Scenario + (1 + Timepoint + Scenario | ID), data=PVTNBACKNASATCExp2)
+EA3 <- lmer(MAS.alertness.original ~ Scenario + I(Scenario^2) + Timepoint + Timepoint:Scenario + (1 + Timepoint | ID), data=PVTNBACKNASATCExp2)
+EA4 <- lmer(MAS.alertness.original ~ Scenario + I(Scenario^2) + Timepoint + Timepoint:Scenario + (1 | ID), data=PVTNBACKNASATCExp2)
+
+anova(EA1, EA2, EA3, EA4)
+
+isSingular(EA1, tol = 1e-4)
+isSingular(EA2, tol = 1e-4)
+isSingular(EA3, tol = 1e-4)
+isSingular(EA4, tol = 1e-4)
+
+anova(EA1, EA2)
+anova(EA1, EA3)
+anova(EA1, EA4)
+anova(EA2, EA3)
+anova(EA3, EA4)
