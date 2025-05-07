@@ -150,7 +150,7 @@ PVTNBACKNASATCExp2[, `:=` (
   Timepoint = as.numeric(Timepoint)
 )]
 
-formula = "MAS.comfort.original ~ Scenario + I(Scenario^2) + Timepoint + Timepoint:Scenario + (1|ID)"
+formula = "MAS.comfort.original ~ Scenario + I(Scenario^2) + Timepoint + Timepoint:Scenario + (1 + Timepoint + Scenario + I(Scenario^2) | ID)"
 model = lmer(formula = formula, data = PVTNBACKNASATCExp2)
 summary(model)
 AIC(model)
@@ -158,6 +158,31 @@ BIC(model)
 
 num_fixed_effects <- length(fixef(model))
 p_values <- summary(model)$coefficients[, "Pr(>|t|)"]
-p_values_corrected <- p.adjust(p_values, method = "bonferroni", n = num_fixed_effects)
+p_values_corrected <- p.adjust(p_values, method = "BH")
 p_values_corrected
 
+
+isSingular(model, tol = 1e-4)
+
+
+TA1 <- lmer(MAS.comfort.original ~ Scenario + I(Scenario^2) + Timepoint + Timepoint:Scenario + (1 + Timepoint + Scenario + I(Scenario^2) | ID), data=PVTNBACKNASATCExp2)
+TA11 <- lmer(MAS.comfort.original ~ Scenario + I(Scenario^2) + Timepoint + Timepoint:Scenario + (1 + Scenario + I(Scenario^2) | ID), data=PVTNBACKNASATCExp2)
+TA2 <- lmer(MAS.comfort.original ~ Scenario + I(Scenario^2) + Timepoint + Timepoint:Scenario + (1 + Timepoint + Scenario | ID), data=PVTNBACKNASATCExp2)
+TA3 <- lmer(MAS.comfort.original ~ Scenario + I(Scenario^2) + Timepoint + Timepoint:Scenario + (1 + Timepoint | ID), data=PVTNBACKNASATCExp2)
+TA4 <- lmer(MAS.comfort.original ~ Scenario + I(Scenario^2) + Timepoint + Timepoint:Scenario + (1 | ID), data=PVTNBACKNASATCExp2)
+
+
+anova(TA1, TA2, TA3, TA4)
+
+isSingular(TA1, tol = 1e-4)
+isSingular(TA2, tol = 1e-4)
+isSingular(TA3, tol = 1e-4)
+isSingular(TA4, tol = 1e-4)
+
+anova(TA1, TA2, TA3, TA4)
+anova(TA1, TA2)
+anova(TA1, TA11)
+anova(TA1, TA3)
+anova(TA1, TA4)
+anova(TA2, TA3)
+anova(TA3, TA4)
