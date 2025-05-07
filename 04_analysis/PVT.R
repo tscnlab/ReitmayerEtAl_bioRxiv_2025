@@ -138,7 +138,7 @@ PVTNBACKNASATCExp2[, `:=` (
   Timepoint = as.numeric(Timepoint)
 )]
 
-formula = "Mean.RT ~ Scenario + I(Scenario^2) + Timepoint + Timepoint:Scenario + (1|ID)"
+formula = "Mean.RT ~ Scenario + I(Scenario^2) + Timepoint + Timepoint:Scenario + (1 + Timepoint + Scenario + I(Scenario^2) | ID)"
 model = lmer(formula = formula, data = PVTNBACKNASATCExp2)
 summary(model)
 AIC(model)
@@ -146,5 +146,21 @@ BIC(model)
 
 num_fixed_effects = length(fixef(model))
 p_values = summary(model)$coefficients[, "Pr(>|t|)"]
-p_values_corrected = p.adjust(p_values, method = "bonferroni", n = num_fixed_effects)
+p_values_corrected = p.adjust(p_values, method = "BH")
 p_values_corrected
+
+isSingular(model, tol = 1e-4)
+
+PVT1 <- lmer(Mean.RT ~ Scenario + I(Scenario^2) + Timepoint + Timepoint:Scenario + (1 + Timepoint + Scenario + I(Scenario^2) | ID), data=PVTNBACKNASATCExp2)
+PVT2 <- lmer(Mean.RT ~ Scenario + I(Scenario^2) + Timepoint + Timepoint:Scenario + (1 + Timepoint + Scenario | ID), data=PVTNBACKNASATCExp2)
+PVT3 <- lmer(Mean.RT ~ Scenario + I(Scenario^2) + Timepoint + Timepoint:Scenario + (1 + Timepoint | ID), data=PVTNBACKNASATCExp2)
+PVT4 <- lmer(Mean.RT ~ Scenario + I(Scenario^2) + Timepoint + Timepoint:Scenario + (1 | ID), data=PVTNBACKNASATCExp2)
+
+isSingular(PVT1, tol = 1e-4)
+
+anova(PVT1, PVT2, PVT3, PVT4)
+anova(PVT1, PVT2)
+anova(PVT1, PVT3)
+anova(PVT1, PVT4)
+anova(PVT2, PVT3)
+anova(PVT3, PVT4)
