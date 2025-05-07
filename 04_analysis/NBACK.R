@@ -158,7 +158,6 @@ Acc4 <- lmer(Accuracy ~ Scenario + I(Scenario^2) + Timepoint + Timepoint:Scenari
 
 anova(Acc1, Acc2, Acc3, Acc4)
 
-
 isSingular(Acc1, tol = 1e-4)
 isSingular(Acc2, tol = 1e-4)
 isSingular(Acc3, tol = 1e-4)
