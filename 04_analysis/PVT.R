@@ -157,6 +157,9 @@ PVT3 <- lmer(Mean.RT ~ Scenario + I(Scenario^2) + Timepoint + Timepoint:Scenario
 PVT4 <- lmer(Mean.RT ~ Scenario + I(Scenario^2) + Timepoint + Timepoint:Scenario + (1 | ID), data=PVTNBACKNASATCExp2)
 
 isSingular(PVT1, tol = 1e-4)
+isSingular(PVT2, tol = 1e-4)
+isSingular(PVT3, tol = 1e-4)
+isSingular(PVT4, tol = 1e-4)
 
 anova(PVT1, PVT2, PVT3, PVT4)
 anova(PVT1, PVT2)
