@@ -136,7 +136,7 @@ PVTNBACKNASATCExp2[, `:=` (
   Timepoint = as.numeric(Timepoint)
 )]
 
-formula = "Accuracy ~ Scenario + I(Scenario^2) + Timepoint + Timepoint:Scenario + (1|ID)" 
+formula = "Accuracy ~ Scenario + I(Scenario^2) + Timepoint + Timepoint:Scenario + (1 + Timepoint + Scenario + I(Scenario^2) | ID)" 
 model = lmer(formula = formula, data = PVTNBACKNASATCExp2)
 summary(model)
 AIC(model)
@@ -144,8 +144,31 @@ BIC(model)
 
 num_fixed_effects <- length(fixef(model))
 p_values <- summary(model)$coefficients[, "Pr(>|t|)"]
-p_values_corrected <- p.adjust(p_values, method = "bonferroni", n = num_fixed_effects)
+p_values_corrected <- p.adjust(p_values, method = "BH")
 p_values_corrected
+
+
+isSingular(model, tol = 1e-4)
+
+
+Acc1 <- lmer(Accuracy ~ Scenario + I(Scenario^2) + Timepoint + Timepoint:Scenario + (1 + Timepoint + Scenario + I(Scenario^2) | ID), data=PVTNBACKNASATCExp2)
+Acc2 <- lmer(Accuracy ~ Scenario + I(Scenario^2) + Timepoint + Timepoint:Scenario + (1 + Timepoint + Scenario | ID), data=PVTNBACKNASATCExp2)
+Acc3 <- lmer(Accuracy ~ Scenario + I(Scenario^2) + Timepoint + Timepoint:Scenario + (1 + Timepoint | ID), data=PVTNBACKNASATCExp2)
+Acc4 <- lmer(Accuracy ~ Scenario + I(Scenario^2) + Timepoint + Timepoint:Scenario + (1 | ID), data=PVTNBACKNASATCExp2)
+
+anova(Acc1, Acc2, Acc3, Acc4)
+
+
+isSingular(Acc1, tol = 1e-4)
+isSingular(Acc2, tol = 1e-4)
+isSingular(Acc3, tol = 1e-4)
+isSingular(Acc4, tol = 1e-4)
+
+anova(Acc1, Acc2)
+anova(Acc1, Acc3)
+anova(Acc1, Acc4)
+anova(Acc2, Acc3)
+anova(Acc3, Acc4)
 
 
 
