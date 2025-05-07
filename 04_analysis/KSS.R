@@ -118,7 +118,7 @@ KSSExp2[, `:=` (
   Timepoint = as.numeric(Timepoint)
 )]
 
-formula = "KSS ~ Scenario + I(Scenario^2) + Timepoint + Timepoint:Scenario + (1|ID)"
+formula = "KSS ~ Scenario + I(Scenario^2) + Timepoint + Timepoint:Scenario + (1 + Timepoint + Scenario + I(Scenario^2) | ID)"
 model = lmer(formula = formula, data = KSSExp2)
 summary(model)
 AIC(model)
@@ -126,6 +126,28 @@ BIC(model)
 
 num_fixed_effects <- length(fixef(model))
 p_values <- summary(model)$coefficients[, "Pr(>|t|)"]
-p_values_corrected <- p.adjust(p_values, method = "bonferroni", n = num_fixed_effects)
+p_values_corrected <- p.adjust(p_values, method = "BH")
 p_values_corrected
+
+
+isSingular(model, tol = 1e-4)
+
+
+KSS1 <- lmer(KSS ~ Scenario + I(Scenario^2) + Timepoint + Timepoint:Scenario + (1 + Timepoint + Scenario + I(Scenario^2) | ID), data=KSSExp2)
+KSS2 <- lmer(KSS ~ Scenario + I(Scenario^2) + Timepoint + Timepoint:Scenario + (1 + Timepoint + Scenario | ID), data=KSSExp2)
+KSS3 <- lmer(KSS ~ Scenario + I(Scenario^2) + Timepoint + Timepoint:Scenario + (1 + Timepoint | ID), data=KSSExp2)
+KSS4 <- lmer(KSS ~ Scenario + I(Scenario^2) + Timepoint + Timepoint:Scenario + (1 | ID), data=KSSExp2)
+
+anova(KSS1, KSS2, KSS3, KSS4)
+
+isSingular(KSS1, tol = 1e-4)
+isSingular(KSS2, tol = 1e-4)
+isSingular(KSS3, tol = 1e-4)
+isSingular(KSS4, tol = 1e-4)
+
+anova(KSS1, KSS2)
+anova(KSS1, KSS3)
+anova(KSS1, KSS4)
+anova(KSS2, KSS3)
+anova(KSS3, KSS4)
 
